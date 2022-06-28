@@ -1,0 +1,9 @@
+{
+  "name": "google-trends-write",
+  "version": "1.0.0",
+  "description": "Store google trend data in dynamoDB",
+  "main": "write-google-trends.js",
+  "dependencies": {
+    "google-trends-api": "4.9.2"
+  }
+}
