@@ -1,8 +1,8 @@
 # Overview
-Node function to store Google trends into DynamoDB table
+Node Lambda function to store Google trends into DynamoDB table
 
 # Execute
-`node index.js`
+`node write-google-trends`
 
 # Dependencies
 
