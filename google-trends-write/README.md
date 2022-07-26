@@ -2,6 +2,7 @@
 Node Lambda function to store Google trends into DynamoDB table
 
 # Execute
+`npm install`
 `node write-google-trends`
 
 # Dependencies

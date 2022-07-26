@@ -4,6 +4,7 @@
   "description": "Store google trend data in dynamoDB",
   "main": "write-google-trends.js",
   "dependencies": {
-    "google-trends-api": "4.9.2"
+    "google-trends-api": "4.9.2",
+    "@aws-sdk/client-dynamodb": "3.118.1"
   }
 }
