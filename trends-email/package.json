@@ -1,0 +1,9 @@
+{
+  "name": "send-trends-email",
+  "version": "1.0.0",
+  "description": "Send an email with trending data",
+  "main": "send-trends-email.js",
+  "dependencies": {
+    "aws-sdk": "2.1182.0"
+  }
+}
