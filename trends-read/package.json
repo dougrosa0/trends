@@ -1,0 +1,9 @@
+{
+  "name": "get-trends",
+  "version": "1.0.0",
+  "description": "Get trending data as json",
+  "main": "get-trends",
+  "dependencies": {
+    "aws-sdk": "2.1182.0"
+  }
+}
