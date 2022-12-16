@@ -4,36 +4,39 @@ const dynamodb = new DynamoDB({ region: "us-west-2" });
 
 googleTrends.dailyTrends({
   geo: 'US'
-}, function(err, results) {
+}, saveTrendingSearches);
+
+function saveTrendingSearches (err, results) {
   if (err) {
-  console.log(err);
-  } else {
-    const dailyGoogleTrends = JSON.parse(results);
-    var days = dailyGoogleTrends.default.trendingSearchesDays;
+    console.log(err);
+    return;
+  }
 
-    for (var i = 0; i < days.length; i++) {
-      var day = days[i];
-      var trendingSearches = day.trendingSearches;
-      var searchDate = day.date;
-      console.log("Search date: " + searchDate);
-      var searchCount = 5;
-      if (trendingSearches.length < 5) {
-        searchCount = trendingSearches.length;
-      }
+  const dailyGoogleTrends = JSON.parse(results);
+  let days = dailyGoogleTrends.default.trendingSearchesDays;
 
-      for (var j = 0; j < searchCount; j++) {
-        var search = trendingSearches[j];
-        var rank = j+1;
-        var query = search.title.query;
-        var trafficAmount = search.formattedTraffic;
-        saveItem(query, searchDate, trafficAmount, rank);
-      }
+  for (let i = 0; i < days.length; i++) {
+    let day = days[i];
+    let trendingSearches = day.trendingSearches;
+    let searchDate = day.date;
+    console.log("Search date: " + searchDate);
+    let searchCount = 5;
+    if (trendingSearches.length < 5) {
+      searchCount = trendingSearches.length;
+    }
+
+    for (let j = 0; j < searchCount; j++) {
+      let search = trendingSearches[j];
+      let rank = j+1;
+      let query = search.title.query;
+      let trafficAmount = search.formattedTraffic;
+      saveItem(query, searchDate, trafficAmount, rank);
     }
   }
-});
+};
 
 function saveItem(queryString, searchDate, trafficAmount, dayRank) {
-    var params = {
+    let params = {
         Item: {
 			      "searchDate": {
                 S: searchDate
