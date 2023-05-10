@@ -3,21 +3,10 @@ aws.config.update({
     region: 'us-west-2'
 });
 const docClient = new aws.DynamoDB.DocumentClient();
-const aws = require('aws-sdk');
-aws.config.update({
-    region: 'us-west-2'
-});
-const dynamodb = new aws.DynamoDB();
 
 exports.handler = function(event) {
-    var today = new Date();
-  var year = today.getFullYear().toString();
-  var month = today.getMonth() + 1;
-  var monthWithPrecedingZero = (month < 10 ? "0" : "") + month.toString();
-  var day = today.getDate();
-  var dayWithPrecedingZero = (day < 10 ? "0" : "") + day.toString();
-  var searchDate = year + monthWithPrecedingZero + dayWithPrecedingZero;
-  var searchDateUsFormat = month + "/" + day + "/" + year;
+
+  var searchDate = event.body.date;
   console.log("Querying trends for " + searchDate);
 
   var params = {
@@ -35,7 +24,7 @@ exports.handler = function(event) {
       if (err) {
           console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
       } else {
-          var emailContent = "<h2>Trending Google Searches " + searchDateUsFormat + "</h2>";
+          var emailContent = "<h2>Trending Google Searches " + searchDate + "</h2>";
           emailContent += "<table><tr><th>Rank</th><th>Search</th><th>Traffic amount</th></tr>";
           console.log("Query succeeded.");
           console.log("Query text | Day rank | Traffic amount | Query link")
@@ -57,7 +46,7 @@ exports.handler = function(event) {
     var params = {
       Destination: {
         ToAddresses: [
-          'dougrosa0@gmail.com'
+          event.body.email
         ]
       },
       Message: {
