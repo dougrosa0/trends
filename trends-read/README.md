@@ -1,9 +1,9 @@
 # Overview
 Node function to get trending data from DynamoDb
 
-# Execute
-`npm install`<br/>
-`node get-trends`
+# Deploy
+select all files, zip
+`aws lambda update-function-code --function-name read-trends --zip-file fileb://pathtozip`
 
 # Dependencies
 
